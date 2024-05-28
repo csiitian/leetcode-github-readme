@@ -174,7 +174,7 @@ app.get('/', async (req, res) => {
         const profileData = await fetchLeetcodeProfile(username);
         const svgContent = generateSvgContent(username, profileData);
         res.setHeader('Content-Type', 'image/svg+xml');
-        res.send(svgContent);
+        res.status(200).send(svgContent);
     } catch (error) {
         res.status(500).send(error.message);
     }
