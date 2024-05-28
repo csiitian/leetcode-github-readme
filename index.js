@@ -180,6 +180,12 @@ app.get('/', async (req, res) => {
     }
 });
 
+app.get('/html', async (req, res) => {
+    const htmlContent = "<html><body><p>hello</p></body></html>";
+    // res.setHeader('Content-Type', 'html');
+    res.status(200).send(htmlContent);
+});
+
 app.listen(3000, () => {
     console.log('Server is running on http://localhost:3000');
 });
