@@ -227,7 +227,7 @@ function generateSvgContent(username, profileData) {
 }
 
 function generateSvgBadgeContent(badges) {
-    const badgeSize = 60;
+    const badgeSize = 100;
     const badgesPerRow = 5;
 
     const fixedUrl = (url) => {
@@ -238,17 +238,21 @@ function generateSvgBadgeContent(badges) {
     };
 
     const badgeElements = badges.map((badge, index) => {
-        const x = (index % badgesPerRow) * (badgeSize + 20) + 10;
-        const y = Math.floor(index / badgesPerRow) * (badgeSize + 40) + 10;
+        const x = (index % badgesPerRow) * (badgeSize + 30) + 10;
+        const y = Math.floor(index / badgesPerRow) * (badgeSize + 40) + 10; // Increase the vertical spacing to 80
         return `
-            <g transform="translate(${x}, ${y})">
-                <image href="${fixedUrl(badge.icon)}" height="${badgeSize}" width="${badgeSize}" title="${badge.name}" />
+            <g>
+                <rect x="${x}" y="${y}" width="${badgeSize+25}" height="${badgeSize+35}" fill="#050F2C" stroke="#E4E2E2" stroke-width="1" rx="4"/>
+                <image href="${fixedUrl(badge.icon)}" x="${x + 10}" y="${y + 10}" height="${badgeSize}" width="${badgeSize}" title="${badge.name}" />
+                <text x="${x + 10 + badgeSize / 2}" y="${y + badgeSize + 25}" text-anchor="middle" fill="#FFFFFF" font-family='"Segoe UI", Ubuntu, sans-serif' font-weight="400" font-size="10px" width="${badgeSize - 20}">
+                    ${badge.shortName}
+                </text>
             </g>
         `;
     }).join('');
 
-    const svgHeight = Math.ceil(badges.length / badgesPerRow) * (badgeSize + 40) + 10;
-    const svgWidth = badgesPerRow * (badgeSize + 20) + 10;
+    const svgHeight = Math.ceil(badges.length / badgesPerRow) * (badgeSize + 80) + 10; // Adjust the SVG height accordingly
+    const svgWidth = badgesPerRow * (badgeSize + 30) + 10;
 
     return `
     <svg xmlns="http://www.w3.org/2000/svg" width="${svgWidth}" height="${svgHeight}">
