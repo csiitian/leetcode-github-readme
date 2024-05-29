@@ -1,7 +1,70 @@
 const express = require('express');
 const axios = require('axios');
+const firebase = require('firebase/app');
 
 const app = express();
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+    apiKey: "AIzaSyC8FtUYkeY5AkOn3MiZaIaF9HAFdFIGfuE",
+    authDomain: "leetcode-profile.firebaseapp.com",
+    projectId: "leetcode-profile",
+    storageBucket: "leetcode-profile.appspot.com",
+    messagingSenderId: "483110607639",
+    appId: "1:483110607639:web:8c949b1f1f059af4807552",
+    measurementId: "G-DVSLMRM0VW"
+};
+
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
+async function fetchLeetcodeBadges(username) {
+    const graphqlQuery = {
+        query: `
+        query userBadges($username: String!) {
+            matchedUser(username: $username) {
+                badges {
+                    id
+                    name
+                    shortName
+                    displayName
+                    icon
+                    hoverText
+                    medal {
+                        slug
+                        config {
+                            iconGif
+                            iconGifBackground
+                        }
+                    }
+                    creationDate
+                    category
+                }
+                upcomingBadges {
+                    name
+                    icon
+                    progress
+                }
+            }
+        } 
+        `,
+        variables: { username }
+    };
+
+    const api_url = 'https://leetcode.com/graphql';
+    try {
+        const response = await axios.post(api_url, graphqlQuery, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        return response.data;
+    } catch (error) {
+        throw new Error('Failed to fetch LeetCode badges');
+    }
+}
 
 async function fetchLeetcodeProfile(username) {
     const graphqlQuery = {
@@ -163,6 +226,37 @@ function generateSvgContent(username, profileData) {
   `;
 }
 
+function generateSvgBadgeContent(badges) {
+    const badgeSize = 60;
+    const badgesPerRow = 5;
+
+    const fixedUrl = (url) => {
+        if (url.startsWith('/static')) {
+            return `https://assets.leetcode.com/static_assets/public${url.replace('/static', '')}`;
+        }
+        return url;
+    };
+
+    const badgeElements = badges.map((badge, index) => {
+        const x = (index % badgesPerRow) * (badgeSize + 20) + 10;
+        const y = Math.floor(index / badgesPerRow) * (badgeSize + 40) + 10;
+        return `
+            <g transform="translate(${x}, ${y})">
+                <image href="${fixedUrl(badge.icon)}" height="${badgeSize}" width="${badgeSize}" title="${badge.name}" />
+            </g>
+        `;
+    }).join('');
+
+    const svgHeight = Math.ceil(badges.length / badgesPerRow) * (badgeSize + 40) + 10;
+    const svgWidth = badgesPerRow * (badgeSize + 20) + 10;
+
+    return `
+    <svg xmlns="http://www.w3.org/2000/svg" width="${svgWidth}" height="${svgHeight}">
+        ${badgeElements}
+    </svg>
+    `;
+} 
+
 app.get('/', async (req, res) => {
     const username = req.query.username;
 
@@ -180,10 +274,22 @@ app.get('/', async (req, res) => {
     }
 });
 
-app.get('/html', async (req, res) => {
-    const htmlContent = "<html><body><p>hello</p></body></html>";
-    // res.setHeader('Content-Type', 'html');
-    res.status(200).send(htmlContent);
+app.get('/badges', async (req, res) => {
+    const username = req.query.username;
+
+    if (!username) {
+        return res.status(400).send('Username is required');
+    }
+
+    try {
+        const badgesData = await fetchLeetcodeBadges(username);
+        const badges = badgesData.data.matchedUser.badges
+        const svgContent = generateSvgBadgeContent(badges);
+        res.setHeader('Content-Type', 'image/svg+xml');
+        res.status(200).send(svgContent);
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
 });
 
 app.listen(3000, () => {
