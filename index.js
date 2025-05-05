@@ -1,24 +1,7 @@
 const express = require('express');
 const axios = require('axios');
-const firebase = require('firebase/app');
 
 const app = express();
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-    apiKey: "AIzaSyC8FtUYkeY5AkOn3MiZaIaF9HAFdFIGfuE",
-    authDomain: "leetcode-profile.firebaseapp.com",
-    projectId: "leetcode-profile",
-    storageBucket: "leetcode-profile.appspot.com",
-    messagingSenderId: "483110607639",
-    appId: "1:483110607639:web:8c949b1f1f059af4807552",
-    measurementId: "G-DVSLMRM0VW"
-};
-
-
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
 
 async function fetchLeetcodeBadges(username) {
     const graphqlQuery = {
@@ -259,7 +242,7 @@ function generateSvgBadgeContent(badges) {
         ${badgeElements}
     </svg>
     `;
-} 
+}
 
 app.get('/', async (req, res) => {
     const username = req.query.username;
@@ -274,7 +257,7 @@ app.get('/', async (req, res) => {
         res.setHeader('Content-Type', 'image/svg+xml');
         res.status(200).send(svgContent);
     } catch (error) {
-        res.status(500).send(error.message);
+        res.status(500).send('Internal Server Error');
     }
 });
 
@@ -292,7 +275,7 @@ app.get('/badges', async (req, res) => {
         res.setHeader('Content-Type', 'image/svg+xml');
         res.status(200).send(svgContent);
     } catch (error) {
-        res.status(500).send(error.message);
+        res.status(500).send('Internal Server Error');
     }
 });
 

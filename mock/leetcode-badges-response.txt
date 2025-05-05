@@ -1,0 +1,112 @@
+[
+  {
+    id: '3955491',
+    name: 'Knight',
+    shortName: 'Knight',
+    displayName: 'Knight',
+    icon: '/static/images/badges/knight.png',
+    hoverText: 'Knight Top 25% site-wide\n(18103 total)',
+    medal: { slug: 'knight', config: [Object] },
+    creationDate: '2024-05-22',
+    category: 'COMPETITION'
+  },
+  {
+    id: '3680334',
+    name: 'Annual Badge',
+    shortName: '100 Days Badge 2024',
+    displayName: '100 Days Badge 2024',
+    icon: 'https://assets.leetcode.com/static_assets/marketing/2024-100-lg.png',
+    hoverText: '100 Days Badge 2024',
+    medal: { slug: '100-days-badge-2024', config: [Object] },
+    creationDate: '2024-04-09',
+    category: 'COMPETITION'
+  },
+  {
+    id: '3364828',
+    name: 'Annual Badge',
+    shortName: '50 Days Badge 2024',
+    displayName: '50 Days Badge 2024',
+    icon: 'https://assets.leetcode.com/static_assets/marketing/2024-50-lg.png',
+    hoverText: '50 Days Badge 2024',
+    medal: { slug: '50-days-badge-2024', config: [Object] },
+    creationDate: '2024-02-19',
+    category: 'COMPETITION'
+  },
+  {
+    id: '2790365',
+    name: 'Annual Badge',
+    shortName: '50 Days Badge 2023',
+    displayName: '50 Days Badge 2023',
+    icon: 'https://assets.leetcode.com/static_assets/marketing/lg50.png',
+    hoverText: '50 Days Badge 2023',
+    medal: { slug: '50-days-badge-2023', config: [Object] },
+    creationDate: '2023-12-15',
+    category: 'COMPETITION'
+  },
+  {
+    id: '2790364',
+    name: 'Annual Badge',
+    shortName: '100 Days Badge 2023',
+    displayName: '100 Days Badge 2023',
+    icon: 'https://assets.leetcode.com/static_assets/marketing/lg100.png',
+    hoverText: '100 Days Badge 2023',
+    medal: { slug: '100-days-badge-2023', config: [Object] },
+    creationDate: '2023-12-15',
+    category: 'COMPETITION'
+  },
+  {
+    id: '3631087',
+    name: 'Daily Coding Challenge',
+    shortName: 'Mar Badge',
+    displayName: 'Mar LeetCoding Challenge',
+    icon: '/static/images/badges/dcc-2024-3.png',
+    hoverText: 'Mar LeetCoding Challenge',
+    medal: { slug: 'dcc-march-2024', config: [Object] },
+    creationDate: '2024-03-31',
+    category: 'DCC'
+  },
+  {
+    id: '3448893',
+    name: 'Daily Coding Challenge',
+    shortName: 'Feb Badge',
+    displayName: 'Feb LeetCoding Challenge',
+    icon: '/static/images/badges/dcc-2024-2.png',
+    hoverText: 'Feb LeetCoding Challenge',
+    medal: { slug: 'dcc-february-2024', config: [Object] },
+    creationDate: '2024-02-29',
+    category: 'DCC'
+  },
+  {
+    id: '3252640',
+    name: 'Daily Coding Challenge',
+    shortName: 'Jan Badge',
+    displayName: 'Jan LeetCoding Challenge',
+    icon: '/static/images/badges/dcc-2024-1.png',
+    hoverText: 'Jan LeetCoding Challenge',
+    medal: { slug: 'dcc-january-2024', config: [Object] },
+    creationDate: '2024-01-31',
+    category: 'DCC'
+  },
+  {
+    id: '3156090',
+    name: 'Daily Coding Challenge',
+    shortName: 'Dec Badge',
+    displayName: 'Dec LeetCoding Challenge',
+    icon: '/static/images/badges/dcc-2023-12.png',
+    hoverText: 'Dec LeetCoding Challenge',
+    medal: { slug: 'dcc-december-2023', config: [Object] },
+    creationDate: '2023-12-31',
+    category: 'DCC'
+  },
+  {
+    id: '2688573',
+    name: 'Daily Coding Challenge',
+    shortName: 'Nov Badge',
+    displayName: 'Nov LeetCoding Challenge',
+    icon: '/static/images/badges/dcc-2023-11.png',
+    hoverText: 'Nov LeetCoding Challenge',
+    medal: { slug: 'dcc-november-2023', config: [Object] },
+    creationDate: '2023-11-30',
+    category: 'DCC'
+  }
+]
